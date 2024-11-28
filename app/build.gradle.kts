@@ -1,16 +1,29 @@
 plugins {
   alias(libs.plugins.android.application)
   alias(libs.plugins.jetbrains.kotlin.android)
+  alias(libs.plugins.google.dagger.hilt.android)
+  alias(libs.plugins.google.devtools.ksp)
+  alias(libs.plugins.jetbrains.kotlin.serialization)
+  alias(libs.plugins.jlleitschuh.gradle.ktlint)
+}
+
+subprojects {
+  apply(plugin = "org.jlleitschuh.gradle.ktlint")
+
+  configure<org.jlleitschuh.gradle.ktlint.KtlintExtension> {
+    android.set(true)
+    verbose.set(true)
+  }
 }
 
 android {
   namespace = "com.kenkoro.projects.githubClone"
-  compileSdk = 34
+  compileSdk = 35
 
   defaultConfig {
     applicationId = "com.kenkoro.projects.githubClone"
     minSdk = 21
-    targetSdk = 34
+    targetSdk = 35
     versionCode = 1
     versionName = "1.0"
 
@@ -20,7 +33,10 @@ android {
   buildTypes {
     release {
       isMinifyEnabled = false
-      proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+      proguardFiles(
+        getDefaultProguardFile("proguard-android-optimize.txt"),
+        "proguard-rules.pro",
+      )
     }
   }
   compileOptions {
@@ -36,7 +52,8 @@ android {
 }
 
 dependencies {
-
+  ksp(libs.hilt.android.compiler)
+  implementation(libs.bundles.dagger.hilt)
   implementation(libs.androidx.core.ktx)
   implementation(libs.androidx.appcompat)
   implementation(libs.material)
