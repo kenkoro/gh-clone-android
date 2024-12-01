@@ -5,4 +5,8 @@
   <dimen name="auth_ed_horizontal_margin">16dp</dimen>
   <dimen name="auth_ed_horizontal_padding">16dp</dimen>
   <dimen name="auth_ed_top_margin">48dp</dimen>
+  <dimen name="auth_btn_ts">14sp</dimen>
+  <dimen name="auth_btn_bottom_margin">16dp</dimen>
+  <dimen name="auth_btn_horizontal_margin">16dp</dimen>
+  <dimen name="auth_btn_height">36dp</dimen>
 </resources>
