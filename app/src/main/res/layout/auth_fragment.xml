@@ -15,21 +15,31 @@
     app:layout_constraintRight_toRightOf="parent"
     app:layout_constraintTop_toTopOf="parent" />
 
-  <EditText
-    android:id="@+id/etAuthToken"
+  <com.google.android.material.textfield.TextInputLayout
     android:layout_width="0dp"
-    android:layout_height="@dimen/auth_ed_height"
-    android:layout_marginHorizontal="@dimen/auth_ed_horizontal_margin"
-    android:layout_marginTop="@dimen/auth_ed_top_margin"
-    android:autofillHints="password"
-    android:backgroundTint="@color/gray"
-    android:hint="@string/auth_ed_text"
-    android:inputType="text"
-    android:paddingHorizontal="@dimen/auth_ed_horizontal_padding"
-    android:textSize="16sp"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="@dimen/auth_et_horizontal_margin"
+    android:hint="@string/auth_et_text"
+    android:text="@string/auth_et_text"
+    app:boxStrokeColor="@color/til_auth_token_box_stroke_color"
+    app:boxStrokeErrorColor="@color/error"
+    app:cursorColor="@color/secondary"
+    app:errorEnabled="true"
+    app:errorTextColor="@color/error"
+    app:hintTextColor="@color/secondary"
     app:layout_constraintLeft_toLeftOf="parent"
     app:layout_constraintRight_toRightOf="parent"
-    app:layout_constraintTop_toBottomOf="@id/ivAuthLogo" />
+    app:layout_constraintTop_toBottomOf="@id/ivAuthLogo">
+
+    <com.google.android.material.textfield.TextInputEditText
+      android:id="@+id/tietAuthToken"
+      android:layout_width="match_parent"
+      android:layout_height="@dimen/auth_et_height"
+      android:backgroundTint="@color/background"
+      android:inputType="textPassword"
+      android:paddingHorizontal="@dimen/auth_et_horizontal_padding"
+      android:textSize="16sp" />
+  </com.google.android.material.textfield.TextInputLayout>
 
   <Button
     android:id="@+id/btnAuth"

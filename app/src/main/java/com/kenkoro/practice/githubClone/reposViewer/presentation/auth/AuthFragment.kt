@@ -16,7 +16,7 @@ class AuthFragment : Fragment() {
     inflater: LayoutInflater,
     container: ViewGroup?,
     savedInstanceState: Bundle?,
-  ): View? {
+  ): View {
     _binding = AuthFragmentBinding.inflate(inflater, container, false)
     return binding.root
   }
@@ -26,7 +26,6 @@ class AuthFragment : Fragment() {
     savedInstanceState: Bundle?,
   ) {
     super.onViewCreated(view, savedInstanceState)
-    // TODO
   }
 
   override fun onDestroyView() {
