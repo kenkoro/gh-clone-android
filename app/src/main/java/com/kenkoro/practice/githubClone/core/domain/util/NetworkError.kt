@@ -5,4 +5,7 @@ enum class NetworkError : Error {
   Serialization,
   ServerError,
   Unknown,
+  NotModified,
+  RequiresAuthentication,
+  Forbidden,
 }
