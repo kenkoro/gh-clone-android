@@ -7,10 +7,20 @@
     <item name="colorSecondary">@color/secondary</item>
     <item name="colorError">@color/error</item>
     <item name="android:statusBarColor">?attr/backgroundColor</item>
-    <item name="colorPrimary">?attr/colorAccent</item>
     <item name="colorSurface">@color/gray</item>
     <item name="colorOnSurface">@color/white</item>
+
+    <item name="textInputStyle">@style/TextInputLayout.GithubApp</item>
   </style>
 
   <style name="Theme.GithubApp" parent="Base.Theme.GithubApp" />
+
+  <style name="TextInputLayout.GithubApp" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
+    <item name="boxStrokeColor">?attr/colorSecondary</item>
+    <item name="cursorColor">?attr/colorSecondary</item>
+    <item name="hintTextColor">?attr/colorSecondary</item>
+    <item name="boxStrokeErrorColor">?attr/colorError</item>
+    <item name="cursorErrorColor">?attr/colorError</item>
+    <item name="helperTextTextColor">?attr/colorError</item>
+  </style>
 </resources>

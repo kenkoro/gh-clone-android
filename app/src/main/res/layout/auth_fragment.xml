@@ -16,17 +16,13 @@
     app:layout_constraintTop_toTopOf="parent" />
 
   <com.google.android.material.textfield.TextInputLayout
+    android:id="@+id/tilAuthToken"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="@dimen/auth_et_horizontal_margin"
     android:hint="@string/auth_et_text"
     android:text="@string/auth_et_text"
-    app:boxStrokeColor="@color/til_auth_token_box_stroke_color"
-    app:boxStrokeErrorColor="@color/error"
-    app:cursorColor="@color/secondary"
     app:errorEnabled="true"
-    app:errorTextColor="@color/error"
-    app:hintTextColor="@color/secondary"
     app:layout_constraintLeft_toLeftOf="parent"
     app:layout_constraintRight_toRightOf="parent"
     app:layout_constraintTop_toBottomOf="@id/ivAuthLogo">
@@ -38,21 +34,39 @@
       android:backgroundTint="@color/background"
       android:inputType="textPassword"
       android:paddingHorizontal="@dimen/auth_et_horizontal_padding"
+      android:textColor="@color/white"
       android:textSize="16sp" />
   </com.google.android.material.textfield.TextInputLayout>
 
-  <Button
+  <RelativeLayout
     android:id="@+id/btnAuth"
-    android:layout_width="0dp"
+    style="@style/Widget.MaterialComponents.Button"
+    android:layout_width="match_parent"
     android:layout_height="@dimen/auth_btn_height"
-    android:layout_marginHorizontal="@dimen/auth_btn_horizontal_margin"
+    android:layout_marginHorizontal="@dimen/auth_et_horizontal_margin"
     android:layout_marginBottom="@dimen/auth_btn_bottom_margin"
     android:background="@drawable/auth_btn_background"
-    android:text="@string/auth_btn_text"
-    android:textAllCaps="true"
-    android:textColor="@color/white"
-    android:textSize="@dimen/auth_btn_ts"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintLeft_toLeftOf="parent"
-    app:layout_constraintRight_toRightOf="parent" />
+    app:layout_constraintRight_toRightOf="parent">
+
+    <ProgressBar
+      android:id="@+id/pbBtnAuth"
+      android:layout_width="24dp"
+      android:layout_height="24dp"
+      android:layout_centerInParent="true"
+      android:indeterminate="true"
+      android:indeterminateTint="@color/white"
+      android:visibility="gone" />
+
+    <TextView
+      android:id="@+id/tvBtnAuth"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="@string/auth_btn_text"
+      android:textAllCaps="true"
+      android:textColor="@color/white"
+      android:textSize="@dimen/auth_btn_ts"
+      android:textStyle="bold" />
+  </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
