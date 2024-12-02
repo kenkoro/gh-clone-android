@@ -37,6 +37,10 @@ android {
         getDefaultProguardFile("proguard-android-optimize.txt"),
         "proguard-rules.pro",
       )
+      buildConfigField("String", "BASE_URL", "\"https://api.github.com/\"")
+    }
+    debug {
+      buildConfigField("String", "BASE_URL", "\"https://api.github.com/\"")
     }
   }
   compileOptions {
@@ -48,12 +52,14 @@ android {
   }
   buildFeatures {
     viewBinding = true
+    buildConfig = true
   }
 }
 
 dependencies {
   ksp(libs.hilt.android.compiler)
   implementation(libs.bundles.dagger.hilt)
+  implementation(libs.squareup.retrofit2)
   implementation(libs.androidx.core.ktx)
   implementation(libs.androidx.appcompat)
   implementation(libs.material)
