@@ -9,7 +9,9 @@ import com.kenkoro.practice.githubClone.core.navigation.Screen
 import com.kenkoro.practice.githubClone.reposViewer.presentation.auth.AuthFragment
 import com.kenkoro.projects.githubClone.R
 import com.kenkoro.projects.githubClone.databinding.ActivityMainBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
   private lateinit var binding: ActivityMainBinding
 
