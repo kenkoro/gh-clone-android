@@ -3,4 +3,5 @@
   <string name="auth_logo_cd">Github auth logo</string>
   <string name="auth_et_text">Personal access token</string>
   <string name="auth_btn_text">Sign In</string>
+  <string name="auth_et_helper">Invalid token</string>
 </resources>

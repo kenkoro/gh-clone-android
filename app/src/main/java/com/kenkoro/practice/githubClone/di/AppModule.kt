@@ -1,6 +1,8 @@
 package com.kenkoro.practice.githubClone.di
 
 import com.kenkoro.practice.githubClone.reposViewer.data.networking.GithubApi
+import com.kenkoro.practice.githubClone.reposViewer.data.networking.RemoteReposViewerRepository
+import com.kenkoro.practice.githubClone.reposViewer.domain.ReposViewerRepository
 import com.kenkoro.projects.githubClone.BuildConfig
 import dagger.Module
 import dagger.Provides
@@ -17,6 +19,7 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 class AppModule {
+  private val json = Json { ignoreUnknownKeys = true }
   private val contentType = MediaType.get("application/vnd.github+json")
   private val okHttpClient =
     OkHttpClient.Builder()
@@ -33,9 +36,7 @@ class AppModule {
       .baseUrl(BuildConfig.BASE_URL)
       .client(okHttpClient)
       .addConverterFactory(
-        Json.asConverterFactory(
-          contentType = contentType,
-        ),
+        json.asConverterFactory(contentType = contentType),
       )
       .build()
 
@@ -43,5 +44,11 @@ class AppModule {
   @Singleton
   fun provideGithubApi(): GithubApi {
     return retrofit.create<GithubApi>()
+  }
+
+  @Provides
+  @Singleton
+  fun provideAppRepository(githubApi: GithubApi): ReposViewerRepository {
+    return RemoteReposViewerRepository(githubApi)
   }
 }

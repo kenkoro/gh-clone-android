@@ -17,6 +17,7 @@
 
   <com.google.android.material.textfield.TextInputLayout
     android:id="@+id/tilAuthToken"
+    style="@style/TextInputLayout.GithubApp"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="@dimen/auth_et_horizontal_margin"
@@ -31,8 +32,8 @@
       android:id="@+id/tietAuthToken"
       android:layout_width="match_parent"
       android:layout_height="@dimen/auth_et_height"
-      android:backgroundTint="@color/background"
-      android:inputType="textPassword"
+      android:backgroundTint="@android:color/transparent"
+      android:inputType="text"
       android:paddingHorizontal="@dimen/auth_et_horizontal_padding"
       android:textColor="@color/white"
       android:textSize="16sp" />
