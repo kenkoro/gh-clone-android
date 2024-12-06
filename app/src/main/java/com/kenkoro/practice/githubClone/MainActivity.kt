@@ -7,6 +7,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.fragment
 import com.kenkoro.practice.githubClone.core.navigation.Screen
 import com.kenkoro.practice.githubClone.reposViewer.presentation.auth.AuthFragment
+import com.kenkoro.practice.githubClone.reposViewer.presentation.reposList.ReposListFragment
 import com.kenkoro.projects.githubClone.R
 import com.kenkoro.projects.githubClone.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -29,9 +30,10 @@ class MainActivity : AppCompatActivity() {
     val navController = navHostFragment.navController
     navController.graph =
       navController.createGraph(
-        startDestination = Screen.AuthScreen.route,
+        startDestination = Screen.Auth.route,
       ) {
-        fragment<AuthFragment>(route = Screen.AuthScreen.route) { label = "Auth Screen" }
+        fragment<AuthFragment>(route = Screen.Auth.route) { label = "Auth Screen" }
+        fragment<ReposListFragment>(route = Screen.ReposList.route) { label = "Repos List Screen" }
       }
   }
 }

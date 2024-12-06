@@ -9,7 +9,6 @@ import android.widget.ProgressBar
 import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
-import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
@@ -17,8 +16,10 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
+import com.kenkoro.practice.githubClone.core.navigation.Screen
 import com.kenkoro.projects.githubClone.R
 import com.kenkoro.projects.githubClone.databinding.AuthFragmentBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -118,6 +119,22 @@ class AuthFragment : Fragment() {
   }
 
   private fun onRouteToMainAction() {
+    saveToken()
+    findNavController().navigate(Screen.ReposList.route)
+  }
+
+  private fun saveToken() {
+    val sharedPref =
+      activity?.getSharedPreferences(
+        requireContext().getString(
+          R.string.pat_preference,
+        ),
+        Context.MODE_PRIVATE,
+      ) ?: return
+    with(sharedPref.edit()) {
+      putString(requireContext().getString(R.string.saved_token_key), authViewModel.token.value)
+      apply()
+    }
   }
 
   private fun onShowErrorAction() {
@@ -135,7 +152,7 @@ class AuthFragment : Fragment() {
     if (!tilAuthToken.hasFocus()) {
       tilAuthToken.requestFocus()
     }
-    tilAuthToken.error = ContextCompat.getString(requireContext(), R.string.auth_et_helper)
+    tilAuthToken.error = requireContext().getString(R.string.auth_et_helper)
     stopAuthAnimationIfItWasLaunched()
   }
 
