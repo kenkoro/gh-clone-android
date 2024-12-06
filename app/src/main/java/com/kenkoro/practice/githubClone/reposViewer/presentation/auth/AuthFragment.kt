@@ -1,19 +1,22 @@
 package com.kenkoro.practice.githubClone.reposViewer.presentation.auth
 
+import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
 import android.widget.RelativeLayout
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.kenkoro.projects.githubClone.R
@@ -34,6 +37,19 @@ class AuthFragment : Fragment() {
   private lateinit var pbBtnAuth: ProgressBar
   private lateinit var tvBtnAuth: TextView
   private val authViewModel by viewModels<AuthViewModel>()
+  private lateinit var alertDialog: AlertDialog
+
+  override fun onAttach(context: Context) {
+    super.onAttach(context)
+    alertDialog =
+      AlertDialog.Builder(requireContext())
+        .setTitle(R.string.alert_dialog_title)
+        .setMessage(R.string.alert_dialog_message)
+        .setPositiveButton(R.string.alert_dialog_positive_btn_text) { dialog, _ ->
+          dialog.dismiss()
+        }
+        .create()
+  }
 
   override fun onCreateView(
     inflater: LayoutInflater,
@@ -57,22 +73,7 @@ class AuthFragment : Fragment() {
       authViewModel.onTokenChanged(text.toString())
       tilAuthToken.error = null
     }
-    btnAuth.setOnClickListener {
-      val actions = authViewModel.onSignInButtonPressed()
-      viewLifecycleOwner.lifecycleScope.launch {
-        actions.collectLatest { action ->
-          when (action) {
-            AuthViewModel.Action.RouteToMain -> {
-              Log.d("kenkoro", "Go to the main screen")
-            }
-
-            is AuthViewModel.Action.ShowError -> {
-              Log.d("kenkoro", "Error: ${action.message}")
-            }
-          }
-        }
-      }
-    }
+    btnAuth.setOnClickListener { authViewModel.onSignInButtonPressed() }
   }
 
   private fun setupBindings() {
@@ -90,29 +91,68 @@ class AuthFragment : Fragment() {
     }
     authViewModel.state.observe(viewLifecycleOwner) { state ->
       when (state) {
-        AuthViewModel.State.Idle -> {
-          // TODO: Refactor these animation moments
-          if (pbBtnAuth.isVisible) {
-            stopProgressBarAnimation()
-          }
-        }
+        AuthViewModel.State.Idle -> onIdleAuthState()
 
-        is AuthViewModel.State.InvalidInput -> {
-          if (!tilAuthToken.hasFocus()) {
-            tilAuthToken.requestFocus()
-          }
-          tilAuthToken.error = ContextCompat.getString(requireContext(), R.string.auth_et_helper)
-          if (pbBtnAuth.isVisible) {
-            stopProgressBarAnimation()
-          }
-        }
+        is AuthViewModel.State.InvalidInput -> onInvalidInputAuthState(state.reason)
 
-        AuthViewModel.State.Loading -> {
-          if (!pbBtnAuth.isVisible) {
-            startProgressBarAnimation()
+        AuthViewModel.State.Loading -> onLoadingAuthState()
+      }
+    }
+    viewLifecycleOwner.lifecycleScope.launch {
+      /**
+       * WARN: Never collect a flow from the UI directly from launch or
+       * the launchIn extension function if the UI needs to be updated.
+       * These functions process events even when the view is not visible.
+       * This behavior can lead to app crashes. To avoid that, use the
+       * repeatOnLifecycle API.
+       */
+      repeatOnLifecycle(Lifecycle.State.STARTED) {
+        authViewModel.actions.collectLatest { action ->
+          when (action) {
+            AuthViewModel.Action.RouteToMain -> onRouteToMainAction()
+            is AuthViewModel.Action.ShowError -> onShowErrorAction()
           }
         }
       }
+    }
+  }
+
+  private fun onRouteToMainAction() {
+  }
+
+  private fun onShowErrorAction() {
+    if (tilAuthToken.hasFocus()) {
+      tilAuthToken.clearFocus()
+    }
+    alertDialog.show()
+  }
+
+  private fun onIdleAuthState() {
+    stopAuthAnimationIfItWasLaunched()
+  }
+
+  private fun onInvalidInputAuthState(reason: String) {
+    if (!tilAuthToken.hasFocus()) {
+      tilAuthToken.requestFocus()
+    }
+    tilAuthToken.error = ContextCompat.getString(requireContext(), R.string.auth_et_helper)
+    stopAuthAnimationIfItWasLaunched()
+  }
+
+  private fun onLoadingAuthState() {
+    tilAuthToken.error = null
+    startAuthAnimationIfItWasNotLaunched()
+  }
+
+  private fun stopAuthAnimationIfItWasLaunched() {
+    if (pbBtnAuth.isVisible) {
+      stopProgressBarAnimation()
+    }
+  }
+
+  private fun startAuthAnimationIfItWasNotLaunched() {
+    if (!pbBtnAuth.isVisible) {
+      startProgressBarAnimation()
     }
   }
 
