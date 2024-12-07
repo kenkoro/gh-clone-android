@@ -7,7 +7,7 @@
     <item name="backgroundColor">@color/background</item>
     <item name="colorSecondary">@color/secondary</item>
     <item name="colorError">@color/error</item>
-    <item name="android:statusBarColor">?attr/backgroundColor</item>
+    <item name="android:statusBarColor">@color/primary</item>
     <item name="colorOnSurface">@color/white</item>
   </style>
 

@@ -9,4 +9,9 @@
   <string name="alert_dialog_positive_btn_text">OK</string>
   <string name="pat_preference">com.kenkoro.practice.githubClone.PAT</string>
   <string name="saved_token_key">saved_token</string>
+  <string name="repos_list_title_text">Repositories</string>
+  <string name="repos_list_log_out_btn_cd">Log out button</string>
+  <string name="repo_item_repo_name_default_text">moko-web3</string>
+  <string name="repo_item_repo_default_description"><![CDATA[Ethereum Web3 implementation for mobile (android & ios) Kotlin Multiplatform development. And there's something else to it]]></string>
+  <string name="repo_item_language_default_text">Kotlin</string>
 </resources>

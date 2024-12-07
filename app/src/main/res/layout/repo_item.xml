@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:paddingHorizontal="16dp">
+
+  <TextView
+    android:id="@+id/tvRepoName"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginVertical="@dimen/repo_item_repo_name_vertical_margin"
+    android:text="@string/repo_item_repo_name_default_text"
+    android:textColor="@color/secondary"
+    android:textSize="@dimen/repo_item_repo_name_ts"
+    app:layout_constraintBottom_toTopOf="@id/tvRepoDescription"
+    app:layout_constraintLeft_toLeftOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
+
+  <TextView
+    android:id="@+id/tvRepoDescription"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/repo_item_repo_description_margin_bottom"
+    android:ellipsize="end"
+    android:maxLines="2"
+    android:text="@string/repo_item_repo_default_description"
+    android:textColor="@color/white"
+    android:textSize="@dimen/repo_item_repo_description_ts"
+    android:visibility=""
+    app:layout_constraintBottom_toBottomOf="@id/spacer"
+    app:layout_constraintLeft_toLeftOf="parent"
+    app:layout_constraintRight_toRightOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/tvRepoName" />
+
+  <TextView
+    android:id="@+id/tvRepoMostUsedLanguage"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@string/repo_item_language_default_text"
+    android:textColor="@color/kotlin"
+    android:textSize="@dimen/repo_item_language_ts"
+    app:layout_constraintBottom_toBottomOf="@+id/tvRepoName"
+    app:layout_constraintRight_toRightOf="parent"
+    app:layout_constraintTop_toTopOf="@+id/tvRepoName" />
+
+  <Space
+    android:id="@+id/spacer"
+    android:layout_width="0dp"
+    android:layout_height="1dp"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintLeft_toLeftOf="parent"
+    app:layout_constraintRight_toRightOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

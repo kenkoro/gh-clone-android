@@ -10,4 +10,16 @@
   <dimen name="auth_btn_horizontal_margin">16dp</dimen>
   <dimen name="auth_btn_height">36dp</dimen>
   <dimen name="auth_et_layout_height">96dp</dimen>
+  <dimen name="repos_list_top_bar_height">56dp</dimen>
+  <dimen name="repos_list_title_margin_start">24dp</dimen>
+  <dimen name="repos_list_log_out_btn_width">24dp</dimen>
+  <dimen name="repos_list_log_out_btn_height">24dp</dimen>
+  <dimen name="repos_list_log_out_btn_margin_start">24dp</dimen>
+  <dimen name="repos_list_log_out_btn_margin_end">16dp</dimen>
+  <dimen name="repos_list_title_ts">20sp</dimen>
+  <dimen name="repo_item_repo_name_ts">16sp</dimen>
+  <dimen name="repo_item_repo_description_ts">14sp</dimen>
+  <dimen name="repo_item_language_ts">12sp</dimen>
+  <dimen name="repo_item_repo_description_margin_bottom">14dp</dimen>
+  <dimen name="repo_item_repo_name_vertical_margin">14dp</dimen>
 </resources>
