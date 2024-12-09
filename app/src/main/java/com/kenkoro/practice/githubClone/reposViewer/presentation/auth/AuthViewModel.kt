@@ -32,11 +32,11 @@ class AuthViewModel
     }
     val state: LiveData<State> = _state
 
-    /**
-     * Decided to use a shared flow, because a state flow keeps emitting the last value
-     * after a configuration change (maybe because a new collector comes into play after
-     * the fragment recreation).
-     */
+  /*
+   * Decided to use a shared flow, because a state flow keeps emitting the last value
+   * after a configuration change (maybe because a new collector comes into play after
+   * the fragment recreation).
+   */
     private val _actions by lazy {
       MutableSharedFlow<Action>()
     }

@@ -4,8 +4,12 @@ import com.kenkoro.practice.githubClone.core.data.networking.safeCall
 import com.kenkoro.practice.githubClone.core.domain.util.NetworkError
 import com.kenkoro.practice.githubClone.core.domain.util.Result
 import com.kenkoro.practice.githubClone.core.domain.util.map
+import com.kenkoro.practice.githubClone.core.domain.util.onSuccess
+import com.kenkoro.practice.githubClone.reposViewer.data.mappers.toRepo
 import com.kenkoro.practice.githubClone.reposViewer.data.mappers.toUserInfo
+import com.kenkoro.practice.githubClone.reposViewer.data.networking.dto.ReposResponseDto
 import com.kenkoro.practice.githubClone.reposViewer.data.networking.dto.UserInfoDto
+import com.kenkoro.practice.githubClone.reposViewer.data.storage.KeyValueStorage
 import com.kenkoro.practice.githubClone.reposViewer.domain.Readme
 import com.kenkoro.practice.githubClone.reposViewer.domain.Repo
 import com.kenkoro.practice.githubClone.reposViewer.domain.RepoDetails
@@ -14,9 +18,23 @@ import com.kenkoro.practice.githubClone.reposViewer.domain.UserInfo
 
 class RemoteReposViewerRepository(
   private val githubApi: GithubApi,
+  private val keyValueStorage: KeyValueStorage,
 ) : ReposViewerRepository {
   override suspend fun getRepositories(): Result<List<Repo>, NetworkError> {
-    TODO("Not yet implemented")
+    val token = keyValueStorage.retrieveToken()
+    return safeCall<ReposResponseDto> {
+      githubApi.getRepositories(
+        token = token,
+        options =
+          mapOf(
+            "affiliation" to "owner",
+            "per_page" to "10",
+            "sort" to "updated",
+          ),
+      )
+    }.map { response ->
+      response.data.map { it.toRepo() }
+    }
   }
 
   override suspend fun getRepository(repoId: String): Result<RepoDetails, NetworkError> {
@@ -32,10 +50,14 @@ class RemoteReposViewerRepository(
   }
 
   override suspend fun signIn(token: String): Result<UserInfo, NetworkError> {
-    return safeCall<UserInfoDto> {
-      githubApi.signIn(token)
-    }.map { response ->
-      response.toUserInfo()
-    }
+    val result =
+      safeCall<UserInfoDto> {
+        githubApi.signIn(token)
+      }.map { response ->
+        response.toUserInfo()
+      }
+
+    result.onSuccess { keyValueStorage.saveToken(token) }
+    return result
   }
 }

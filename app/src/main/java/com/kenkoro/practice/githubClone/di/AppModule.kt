@@ -1,7 +1,9 @@
 package com.kenkoro.practice.githubClone.di
 
+import android.app.Application
 import com.kenkoro.practice.githubClone.reposViewer.data.networking.GithubApi
 import com.kenkoro.practice.githubClone.reposViewer.data.networking.RemoteReposViewerRepository
+import com.kenkoro.practice.githubClone.reposViewer.data.storage.KeyValueStorage
 import com.kenkoro.practice.githubClone.reposViewer.domain.ReposViewerRepository
 import com.kenkoro.projects.githubClone.BuildConfig
 import dagger.Module
@@ -48,7 +50,16 @@ class AppModule {
 
   @Provides
   @Singleton
-  fun provideAppRepository(githubApi: GithubApi): ReposViewerRepository {
-    return RemoteReposViewerRepository(githubApi)
+  fun provideKeyValueStorage(app: Application): KeyValueStorage {
+    return KeyValueStorage(app)
+  }
+
+  @Provides
+  @Singleton
+  fun provideAppRepository(
+    githubApi: GithubApi,
+    keyValueStorage: KeyValueStorage,
+  ): ReposViewerRepository {
+    return RemoteReposViewerRepository(githubApi, keyValueStorage)
   }
 }

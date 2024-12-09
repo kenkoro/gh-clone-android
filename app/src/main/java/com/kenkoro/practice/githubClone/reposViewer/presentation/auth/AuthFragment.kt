@@ -100,7 +100,7 @@ class AuthFragment : Fragment() {
       }
     }
     viewLifecycleOwner.lifecycleScope.launch {
-      /**
+      /*
        * WARN: Never collect a flow from the UI directly from launch or
        * the launchIn extension function if the UI needs to be updated.
        * These functions process events even when the view is not visible.
@@ -119,22 +119,7 @@ class AuthFragment : Fragment() {
   }
 
   private fun onRouteToMainAction() {
-    saveToken()
     findNavController().navigate(Screen.ReposList.route)
-  }
-
-  private fun saveToken() {
-    val sharedPref =
-      activity?.getSharedPreferences(
-        requireContext().getString(
-          R.string.pat_preference,
-        ),
-        Context.MODE_PRIVATE,
-      ) ?: return
-    with(sharedPref.edit()) {
-      putString(requireContext().getString(R.string.saved_token_key), authViewModel.token.value)
-      apply()
-    }
   }
 
   private fun onShowErrorAction() {
