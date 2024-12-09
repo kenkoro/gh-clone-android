@@ -19,7 +19,15 @@
   <dimen name="repos_list_title_ts">20sp</dimen>
   <dimen name="repo_item_repo_name_ts">16sp</dimen>
   <dimen name="repo_item_repo_description_ts">14sp</dimen>
-  <dimen name="repo_item_language_ts">12sp</dimen>
-  <dimen name="repo_item_repo_description_margin_bottom">14dp</dimen>
-  <dimen name="repo_item_repo_name_vertical_margin">14dp</dimen>
+  <dimen name="repo_item_repo_language_ts">12sp</dimen>
+  <dimen name="repo_item_repo_name_margin_top">14dp</dimen>
+  <dimen name="repo_item_repo_language_padding_end">16dp</dimen>
+  <dimen name="repo_item_repo_description_horizontal_margin">14dp</dimen>
+  <dimen name="repo_item_repo_name_padding_start">16dp</dimen>
+  <dimen name="repos_list_error_icon_margin_bottom">24dp</dimen>
+  <dimen name="repos_list_error_title_ts">16sp</dimen>
+  <dimen name="repos_list_error_description_ts">14sp</dimen>
+  <dimen name="repos_list_repos_error_btn_ts">14sp</dimen>
+  <dimen name="repos_list_repos_error_btn_margin_bottom">16dp</dimen>
+  <dimen name="repos_list_repos_error_btn_horizontal_margin">16dp</dimen>
 </resources>

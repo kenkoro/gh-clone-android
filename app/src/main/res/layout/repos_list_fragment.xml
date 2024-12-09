@@ -41,6 +41,7 @@
     android:id="@+id/rvRepos"
     android:layout_width="0dp"
     android:layout_height="0dp"
+    android:visibility="gone"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintLeft_toLeftOf="parent"
     app:layout_constraintRight_toRightOf="parent"
@@ -51,9 +52,59 @@
     android:layout_height="56dp"
     android:indeterminate="true"
     android:indeterminateTint="@color/white"
-    android:visibility="gone"
+    android:visibility="visible"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintLeft_toLeftOf="parent"
     app:layout_constraintRight_toRightOf="parent"
     app:layout_constraintTop_toBottomOf="@id/rlTopBar" />
+
+  <RelativeLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:visibility="gone"
+    app:layout_constraintBottom_toTopOf="@id/btnReposError"
+    app:layout_constraintLeft_toLeftOf="parent"
+    app:layout_constraintRight_toRightOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/rlTopBar">
+
+    <ImageView
+      android:id="@+id/ivError"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="@dimen/repos_list_error_icon_margin_bottom"
+      android:contentDescription="@string/repos_list_error_icon_cd"
+      android:src="@drawable/error_icon" />
+
+    <TextView
+      android:id="@+id/tvErrorTitle"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_below="@id/ivError"
+      android:layout_centerHorizontal="true"
+      android:textColor="@color/soft_error"
+      android:textSize="@dimen/repos_list_error_title_ts" />
+
+    <TextView
+      android:id="@+id/tvErrorDescription"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_below="@id/tvErrorTitle"
+      android:layout_centerHorizontal="true"
+      android:textColor="@color/white"
+      android:textSize="@dimen/repos_list_error_description_ts" />
+  </RelativeLayout>
+
+  <androidx.appcompat.widget.AppCompatButton
+    android:id="@+id/btnReposError"
+    android:layout_width="0dp"
+    android:layout_height="@dimen/auth_btn_height"
+    android:layout_marginHorizontal="@dimen/repos_list_repos_error_btn_horizontal_margin"
+    android:layout_marginBottom="@dimen/repos_list_repos_error_btn_margin_bottom"
+    android:background="@drawable/btn_background"
+    android:textColor="@color/white"
+    android:textSize="@dimen/repos_list_repos_error_btn_ts"
+    android:visibility="gone"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintLeft_toLeftOf="parent"
+    app:layout_constraintRight_toRightOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

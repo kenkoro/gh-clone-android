@@ -3,13 +3,15 @@
   xmlns:app="http://schemas.android.com/apk/res-auto"
   android:layout_width="match_parent"
   android:layout_height="wrap_content"
-  android:paddingHorizontal="16dp">
+  android:background="@color/background">
 
   <TextView
     android:id="@+id/tvRepoName"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginVertical="@dimen/repo_item_repo_name_vertical_margin"
+    android:layout_marginTop="@dimen/repo_item_repo_name_margin_top"
+    android:paddingStart="@dimen/repo_item_repo_name_padding_start"
+    android:paddingEnd="0dp"
     android:text="@string/repo_item_repo_name_default_text"
     android:textColor="@color/secondary"
     android:textSize="@dimen/repo_item_repo_name_ts"
@@ -21,14 +23,13 @@
     android:id="@+id/tvRepoDescription"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="@dimen/repo_item_repo_description_margin_bottom"
+    android:layout_marginHorizontal="@dimen/repo_item_repo_description_horizontal_margin"
     android:ellipsize="end"
     android:maxLines="2"
-    android:text="@string/repo_item_repo_default_description"
     android:textColor="@color/white"
     android:textSize="@dimen/repo_item_repo_description_ts"
-    android:visibility=""
-    app:layout_constraintBottom_toBottomOf="@id/spacer"
+    android:visibility="visible"
+    app:layout_constraintBottom_toTopOf="@id/spacerAfterDescription"
     app:layout_constraintLeft_toLeftOf="parent"
     app:layout_constraintRight_toRightOf="parent"
     app:layout_constraintTop_toBottomOf="@id/tvRepoName" />
@@ -37,18 +38,32 @@
     android:id="@+id/tvRepoMostUsedLanguage"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:paddingStart="0dp"
+    android:paddingEnd="@dimen/repo_item_repo_language_padding_end"
     android:text="@string/repo_item_language_default_text"
     android:textColor="@color/kotlin"
-    android:textSize="@dimen/repo_item_language_ts"
+    android:textSize="@dimen/repo_item_repo_language_ts"
     app:layout_constraintBottom_toBottomOf="@+id/tvRepoName"
     app:layout_constraintRight_toRightOf="parent"
     app:layout_constraintTop_toTopOf="@+id/tvRepoName" />
 
   <Space
-    android:id="@+id/spacer"
+    android:id="@+id/spacerAfterDescription"
+    android:layout_width="0dp"
+    android:layout_height="14dp"
+    android:background="@color/background"
+    app:layout_constraintBottom_toTopOf="@id/divider"
+    app:layout_constraintLeft_toLeftOf="parent"
+    app:layout_constraintRight_toRightOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/tvRepoDescription" />
+
+  <View
+    android:id="@+id/divider"
     android:layout_width="0dp"
     android:layout_height="1dp"
+    android:background="@color/primary"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintLeft_toLeftOf="parent"
-    app:layout_constraintRight_toRightOf="parent" />
+    app:layout_constraintRight_toRightOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/spacerAfterDescription" />
 </androidx.constraintlayout.widget.ConstraintLayout>

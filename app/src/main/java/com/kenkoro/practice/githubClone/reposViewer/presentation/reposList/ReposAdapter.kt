@@ -34,7 +34,6 @@ class ReposAdapter(
       tvRepoMostUsedLanguage.text = repo.language
       tvRepoMostUsedLanguage.setTextColor(ContextCompat.getColor(rootContext, repo.colorRes))
 
-      // TODO: Deal w/ the space between a description and a name
       if (repo.description.isNullOrBlank()) {
         tvRepoDescription.visibility = View.GONE
       } else {
