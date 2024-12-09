@@ -62,6 +62,7 @@ dependencies {
   implementation(libs.squareup.retrofit2)
   implementation(libs.kotlinx.serialization.json)
   implementation(libs.converter.kotlinx.serialization)
+  implementation(libs.androidx.recyclerview)
   implementation(libs.androidx.core.ktx)
   implementation(libs.androidx.appcompat)
   implementation(libs.material)
