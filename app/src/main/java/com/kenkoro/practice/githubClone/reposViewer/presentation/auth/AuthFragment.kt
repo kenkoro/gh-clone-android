@@ -92,11 +92,11 @@ class AuthFragment : Fragment() {
     }
     authViewModel.state.observe(viewLifecycleOwner) { state ->
       when (state) {
-        AuthViewModel.State.Idle -> onIdleAuthState()
+        AuthViewModel.State.Idle -> onIdleState()
 
-        is AuthViewModel.State.InvalidInput -> onInvalidInputAuthState(state.reason)
+        is AuthViewModel.State.InvalidInput -> onInvalidInputState(state.reason)
 
-        AuthViewModel.State.Loading -> onLoadingAuthState()
+        AuthViewModel.State.Loading -> onLoadingState()
       }
     }
     viewLifecycleOwner.lifecycleScope.launch {
@@ -111,7 +111,7 @@ class AuthFragment : Fragment() {
         authViewModel.actions.collectLatest { action ->
           when (action) {
             AuthViewModel.Action.RouteToMain -> onRouteToMainAction()
-            is AuthViewModel.Action.ShowError -> onShowErrorAction()
+            is AuthViewModel.Action.ShowError -> onShowErrorAction(action.message)
           }
         }
       }
@@ -122,18 +122,19 @@ class AuthFragment : Fragment() {
     findNavController().navigate(Screen.ReposList.route)
   }
 
-  private fun onShowErrorAction() {
+  private fun onShowErrorAction(message: String) {
     if (tilAuthToken.hasFocus()) {
       tilAuthToken.clearFocus()
     }
+    alertDialog.setMessage(message)
     alertDialog.show()
   }
 
-  private fun onIdleAuthState() {
+  private fun onIdleState() {
     stopAuthAnimationIfItWasLaunched()
   }
 
-  private fun onInvalidInputAuthState(reason: String) {
+  private fun onInvalidInputState(reason: String) {
     if (!tilAuthToken.hasFocus()) {
       tilAuthToken.requestFocus()
     }
@@ -141,7 +142,7 @@ class AuthFragment : Fragment() {
     stopAuthAnimationIfItWasLaunched()
   }
 
-  private fun onLoadingAuthState() {
+  private fun onLoadingState() {
     tilAuthToken.error = null
     startAuthAnimationIfItWasNotLaunched()
   }

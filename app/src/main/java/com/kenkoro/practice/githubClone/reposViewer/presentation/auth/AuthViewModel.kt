@@ -9,6 +9,7 @@ import com.kenkoro.practice.githubClone.core.domain.util.onError
 import com.kenkoro.practice.githubClone.core.domain.util.onSuccess
 import com.kenkoro.practice.githubClone.reposViewer.domain.ReposViewerRepository
 import com.kenkoro.practice.githubClone.reposViewer.domain.UserInfo
+import com.kenkoro.practice.githubClone.reposViewer.presentation.reposList.util.NetworkErrorMessageProvider
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -22,6 +23,7 @@ class AuthViewModel
   @Inject
   constructor(
     private val appRepository: ReposViewerRepository,
+    private val errorMessageProvider: NetworkErrorMessageProvider,
   ) : ViewModel() {
     private val _token by lazy {
       MutableLiveData<String>()
@@ -46,35 +48,25 @@ class AuthViewModel
       _state.value = State.Loading
       val bearerToken = toBearerToken(token.value).trim()
       viewModelScope.launch {
-        val response =
+        val result =
           withContext(Dispatchers.IO) {
             appRepository.signIn(bearerToken)
           }
-        response
-          .onSuccess(::onAuthSuccess)
-          .onError(::onAuthError)
+        result
+          .onSuccess(this@AuthViewModel::onSuccess)
+          .onError(this@AuthViewModel::onError)
       }
     }
 
-    private fun onAuthSuccess(userInfo: UserInfo) {
-      // TODO: Save userInfo.login via SharedPreferences
+    private fun onSuccess(userInfo: UserInfo) {
       _state.value = State.Idle
       viewModelScope.launch {
         _actions.emit(Action.RouteToMain)
       }
     }
 
-    private fun onAuthError(networkError: NetworkError) {
-      val message =
-        when (networkError) {
-          NetworkError.NoInternet -> "No Internet connection"
-          NetworkError.Serialization -> "Serialization failed"
-          NetworkError.ServerError -> "Server error"
-          NetworkError.Unknown -> "Unknown error"
-          NetworkError.NotModified -> "The data in request was not modified"
-          NetworkError.RequiresAuthentication -> "Requires authentication"
-          NetworkError.Forbidden -> "Forbidden resource"
-        }
+    private fun onError(networkError: NetworkError) {
+      val message = errorMessageProvider.getMessage(networkError)
       val reason = produceInvalidInputReason(message)
       viewModelScope.launch {
         _actions.emit(Action.ShowError(message))

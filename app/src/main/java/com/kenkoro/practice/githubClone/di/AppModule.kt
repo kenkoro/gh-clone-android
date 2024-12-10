@@ -5,6 +5,8 @@ import com.kenkoro.practice.githubClone.reposViewer.data.networking.GithubApi
 import com.kenkoro.practice.githubClone.reposViewer.data.networking.RemoteReposViewerRepository
 import com.kenkoro.practice.githubClone.reposViewer.data.storage.KeyValueStorage
 import com.kenkoro.practice.githubClone.reposViewer.domain.ReposViewerRepository
+import com.kenkoro.practice.githubClone.reposViewer.presentation.reposList.util.ColorProvider
+import com.kenkoro.practice.githubClone.reposViewer.presentation.reposList.util.NetworkErrorMessageProvider
 import com.kenkoro.projects.githubClone.BuildConfig
 import dagger.Module
 import dagger.Provides
@@ -52,6 +54,18 @@ class AppModule {
   @Singleton
   fun provideKeyValueStorage(app: Application): KeyValueStorage {
     return KeyValueStorage(app)
+  }
+
+  @Provides
+  @Singleton
+  fun provideColorProvider(app: Application): ColorProvider {
+    return ColorProvider(app)
+  }
+
+  @Provides
+  @Singleton
+  fun provideNetworkErrorMessageProvider(app: Application): NetworkErrorMessageProvider {
+    return NetworkErrorMessageProvider(app)
   }
 
   @Provides

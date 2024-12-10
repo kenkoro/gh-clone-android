@@ -14,4 +14,23 @@
   <string name="repo_item_repo_name_default_text">moko-web3</string>
   <string name="repo_item_language_default_text">Kotlin</string>
   <string name="repos_list_error_icon_cd">Repos error icon</string>
+  <string name="lang_color_js">JavaScript</string>
+  <string name="lang_color_java">Java</string>
+  <string name="lang_color_kotlin">Kotlin</string>
+  <string name="lang_color_css">CSS</string>
+  <string name="lang_color_c">C</string>
+  <string name="no_internet_error_msg">No Internet connection</string>
+  <string name="serialization_error_msg">Serialization failed</string>
+  <string name="server_error_msg">Server error</string>
+  <string name="unknown_error_msg">Unknown error</string>
+  <string name="not_modified_error_msg">The data in the request was not modified</string>
+  <string name="auth_error_msg">Requires authentication</string>
+  <string name="forbidden_error_msg">Forbidden resource</string>
+  <string name="no_internet_error_keyword">Internet</string>
+  <string name="warning_container_no_internet_error_title">Connection error</string>
+  <string name="warning_container_other_error_title">An error occurred</string>
+  <string name="btn_retry_text_on_error">Retry</string>
+  <string name="btn_retry_text_on_empty">Refresh</string>
+  <string name="warning_container_empty_title">Empty</string>
+  <string name="warning_container_empty_description">No repositories at the moment</string>
 </resources>

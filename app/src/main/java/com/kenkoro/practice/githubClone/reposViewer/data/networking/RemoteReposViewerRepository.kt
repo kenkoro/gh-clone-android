@@ -7,7 +7,7 @@ import com.kenkoro.practice.githubClone.core.domain.util.map
 import com.kenkoro.practice.githubClone.core.domain.util.onSuccess
 import com.kenkoro.practice.githubClone.reposViewer.data.mappers.toRepo
 import com.kenkoro.practice.githubClone.reposViewer.data.mappers.toUserInfo
-import com.kenkoro.practice.githubClone.reposViewer.data.networking.dto.ReposResponseDto
+import com.kenkoro.practice.githubClone.reposViewer.data.networking.dto.RepoDto
 import com.kenkoro.practice.githubClone.reposViewer.data.networking.dto.UserInfoDto
 import com.kenkoro.practice.githubClone.reposViewer.data.storage.KeyValueStorage
 import com.kenkoro.practice.githubClone.reposViewer.domain.Readme
@@ -22,7 +22,7 @@ class RemoteReposViewerRepository(
 ) : ReposViewerRepository {
   override suspend fun getRepositories(): Result<List<Repo>, NetworkError> {
     val token = keyValueStorage.retrieveToken()
-    return safeCall<ReposResponseDto> {
+    return safeCall<List<RepoDto>> {
       githubApi.getRepositories(
         token = token,
         options =
@@ -33,7 +33,7 @@ class RemoteReposViewerRepository(
           ),
       )
     }.map { response ->
-      response.data.map { it.toRepo() }
+      response.map { it.toRepo() }
     }
   }
 

@@ -14,7 +14,7 @@
     app:layout_constraintTop_toTopOf="parent">
 
     <TextView
-      android:id="@+id/tvReposListTitle"
+      android:id="@+id/tvTopBarTitle"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_centerVertical="true"
@@ -48,6 +48,7 @@
     app:layout_constraintTop_toBottomOf="@+id/rlTopBar" />
 
   <ProgressBar
+    android:id="@+id/pbLoadingBar"
     android:layout_width="56dp"
     android:layout_height="56dp"
     android:indeterminate="true"
@@ -59,44 +60,45 @@
     app:layout_constraintTop_toBottomOf="@id/rlTopBar" />
 
   <RelativeLayout
-    android:id="@+id/rlErrorContainer"
+    android:id="@+id/rlWarningContainer"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:visibility="gone"
-    app:layout_constraintBottom_toTopOf="@id/btnReposError"
+    app:layout_constraintBottom_toTopOf="@id/btnRetry"
     app:layout_constraintLeft_toLeftOf="parent"
     app:layout_constraintRight_toRightOf="parent"
     app:layout_constraintTop_toBottomOf="@id/rlTopBar">
 
     <ImageView
-      android:id="@+id/ivError"
+      android:id="@+id/ivWarningIcon"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
+      android:layout_centerHorizontal="true"
       android:layout_marginBottom="@dimen/repos_list_error_icon_margin_bottom"
       android:contentDescription="@string/repos_list_error_icon_cd"
       android:src="@drawable/error_icon" />
 
     <TextView
-      android:id="@+id/tvErrorTitle"
+      android:id="@+id/tvWarningTitle"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_below="@id/ivError"
+      android:layout_below="@id/ivWarningIcon"
       android:layout_centerHorizontal="true"
       android:textColor="@color/soft_error"
       android:textSize="@dimen/repos_list_error_title_ts" />
 
     <TextView
-      android:id="@+id/tvErrorDescription"
+      android:id="@+id/tvWarningDescription"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_below="@id/tvErrorTitle"
+      android:layout_below="@id/tvWarningTitle"
       android:layout_centerHorizontal="true"
       android:textColor="@color/white"
       android:textSize="@dimen/repos_list_error_description_ts" />
   </RelativeLayout>
 
   <androidx.appcompat.widget.AppCompatButton
-    android:id="@+id/btnReposError"
+    android:id="@+id/btnRetry"
     android:layout_width="0dp"
     android:layout_height="@dimen/auth_btn_height"
     android:layout_marginHorizontal="@dimen/repos_list_repos_error_btn_horizontal_margin"

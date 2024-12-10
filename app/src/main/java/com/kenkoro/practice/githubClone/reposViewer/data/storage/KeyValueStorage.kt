@@ -6,11 +6,11 @@ import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 
 class KeyValueStorage(
-  private val context: Context,
+  private val appContext: Context,
 ) {
   private val sharedPref =
-    context.getSharedPreferences(
-      context.getString(
+    appContext.getSharedPreferences(
+      appContext.getString(
         R.string.pat_preference,
       ),
       Context.MODE_PRIVATE,
@@ -25,7 +25,7 @@ class KeyValueStorage(
     this.authToken = authToken
     mutex.withLock {
       with(sharedPref.edit()) {
-        putString(context.getString(R.string.saved_token_key), authToken)
+        putString(appContext.getString(R.string.saved_token_key), authToken)
         apply()
       }
     }
@@ -35,7 +35,7 @@ class KeyValueStorage(
     return if (authToken != null) {
       authToken ?: EMPTY_TOKEN
     } else {
-      sharedPref.getString(context.getString(R.string.saved_token_key), EMPTY_TOKEN)
+      sharedPref.getString(appContext.getString(R.string.saved_token_key), EMPTY_TOKEN)
         ?: EMPTY_TOKEN
     }
   }
