@@ -2,9 +2,9 @@ package com.kenkoro.practice.githubClone.di
 
 import android.app.Application
 import com.kenkoro.practice.githubClone.reposViewer.data.networking.GithubApi
-import com.kenkoro.practice.githubClone.reposViewer.data.networking.RemoteReposViewerRepository
+import com.kenkoro.practice.githubClone.reposViewer.data.networking.RemoteAppRepository
 import com.kenkoro.practice.githubClone.reposViewer.data.storage.KeyValueStorage
-import com.kenkoro.practice.githubClone.reposViewer.domain.ReposViewerRepository
+import com.kenkoro.practice.githubClone.reposViewer.domain.AppRepository
 import com.kenkoro.practice.githubClone.reposViewer.presentation.reposList.util.ColorProvider
 import com.kenkoro.practice.githubClone.reposViewer.presentation.reposList.util.NetworkErrorMessageProvider
 import com.kenkoro.projects.githubClone.BuildConfig
@@ -73,7 +73,7 @@ class AppModule {
   fun provideAppRepository(
     githubApi: GithubApi,
     keyValueStorage: KeyValueStorage,
-  ): ReposViewerRepository {
-    return RemoteReposViewerRepository(githubApi, keyValueStorage)
+  ): AppRepository {
+    return RemoteAppRepository(githubApi, keyValueStorage)
   }
 }
