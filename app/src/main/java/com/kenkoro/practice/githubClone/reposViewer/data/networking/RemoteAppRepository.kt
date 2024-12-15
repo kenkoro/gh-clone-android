@@ -10,16 +10,16 @@ import com.kenkoro.practice.githubClone.reposViewer.data.mappers.toUserInfo
 import com.kenkoro.practice.githubClone.reposViewer.data.networking.dto.RepoDto
 import com.kenkoro.practice.githubClone.reposViewer.data.networking.dto.UserInfoDto
 import com.kenkoro.practice.githubClone.reposViewer.data.storage.KeyValueStorage
+import com.kenkoro.practice.githubClone.reposViewer.domain.AppRepository
 import com.kenkoro.practice.githubClone.reposViewer.domain.Readme
 import com.kenkoro.practice.githubClone.reposViewer.domain.Repo
 import com.kenkoro.practice.githubClone.reposViewer.domain.RepoDetails
-import com.kenkoro.practice.githubClone.reposViewer.domain.ReposViewerRepository
 import com.kenkoro.practice.githubClone.reposViewer.domain.UserInfo
 
-class RemoteReposViewerRepository(
+class RemoteAppRepository(
   private val githubApi: GithubApi,
   private val keyValueStorage: KeyValueStorage,
-) : ReposViewerRepository {
+) : AppRepository {
   override suspend fun getRepositories(): Result<List<Repo>, NetworkError> {
     val token = keyValueStorage.retrieveToken()
     return safeCall<List<RepoDto>> {

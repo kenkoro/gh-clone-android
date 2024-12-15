@@ -10,6 +10,7 @@ import com.kenkoro.projects.githubClone.databinding.RepoItemBinding
 
 class ReposAdapter(
   private val repos: List<RepoUi>,
+  private val listener: OnItemSelectedListener,
 ) : RecyclerView.Adapter<ReposAdapter.RepoViewHolder>() {
   inner class RepoViewHolder(val binding: RepoItemBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -39,9 +40,13 @@ class ReposAdapter(
       } else {
         tvRepoDescription.text = repo.description
       }
-      // TODO: Set here onClick method
+      root.setOnClickListener { listener.onRouteToRepoDetails(repo.id) }
     }
   }
 
   override fun getItemCount(): Int = repos.size
+
+  interface OnItemSelectedListener {
+    fun onRouteToRepoDetails(repoId: Int)
+  }
 }

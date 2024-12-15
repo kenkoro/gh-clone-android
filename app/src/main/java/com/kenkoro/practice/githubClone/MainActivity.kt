@@ -8,6 +8,7 @@ import androidx.navigation.fragment.fragment
 import com.kenkoro.practice.githubClone.core.navigation.Screen
 import com.kenkoro.practice.githubClone.reposViewer.data.storage.KeyValueStorage
 import com.kenkoro.practice.githubClone.reposViewer.presentation.auth.AuthFragment
+import com.kenkoro.practice.githubClone.reposViewer.presentation.repoDetails.RepoDetailsFragment
 import com.kenkoro.practice.githubClone.reposViewer.presentation.reposList.ReposListFragment
 import com.kenkoro.projects.githubClone.R
 import com.kenkoro.projects.githubClone.databinding.ActivityMainBinding
@@ -40,6 +41,9 @@ class MainActivity : AppCompatActivity() {
       ) {
         fragment<AuthFragment>(route = Screen.Auth.route) { label = "Auth Screen" }
         fragment<ReposListFragment>(route = Screen.ReposList.route) { label = "Repos List Screen" }
+        fragment<RepoDetailsFragment>(route = Screen.RepoDetails.route) {
+          label = "Repo Details Screen"
+        }
       }
   }
 

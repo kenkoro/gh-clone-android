@@ -7,7 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.kenkoro.practice.githubClone.core.domain.util.NetworkError
 import com.kenkoro.practice.githubClone.core.domain.util.onError
 import com.kenkoro.practice.githubClone.core.domain.util.onSuccess
-import com.kenkoro.practice.githubClone.reposViewer.domain.ReposViewerRepository
+import com.kenkoro.practice.githubClone.reposViewer.domain.AppRepository
 import com.kenkoro.practice.githubClone.reposViewer.domain.UserInfo
 import com.kenkoro.practice.githubClone.reposViewer.presentation.reposList.util.NetworkErrorMessageProvider
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -22,7 +22,7 @@ import javax.inject.Inject
 class AuthViewModel
   @Inject
   constructor(
-    private val appRepository: ReposViewerRepository,
+    private val appRepository: AppRepository,
     private val errorMessageProvider: NetworkErrorMessageProvider,
   ) : ViewModel() {
     private val _token by lazy {

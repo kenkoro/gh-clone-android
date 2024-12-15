@@ -10,10 +10,15 @@ import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatButton
 import androidx.core.content.ContextCompat
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.kenkoro.practice.githubClone.core.navigation.Screen
+import com.kenkoro.practice.githubClone.core.navigation.util.NavArguments
 import com.kenkoro.practice.githubClone.reposViewer.presentation.models.RepoUi
 import com.kenkoro.projects.githubClone.R
 import com.kenkoro.projects.githubClone.databinding.ReposListFragmentBinding
@@ -79,7 +84,7 @@ class ReposListFragment : Fragment() {
     showReposList()
 
     val rvAdapter =
-      ReposAdapter(repos).apply {
+      ReposAdapter(repos, createRepoSelectionListener()).apply {
         stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
       }
     rvRepos.adapter = rvAdapter
@@ -114,6 +119,18 @@ class ReposListFragment : Fragment() {
     tvWarningDescription.setText(R.string.warning_container_empty_description)
     tvWarningTitle.setTextColor(ContextCompat.getColor(requireContext(), R.color.secondary))
     btnRetry.setText(R.string.btn_retry_text_on_empty)
+  }
+
+  private fun createRepoSelectionListener(): ReposAdapter.OnItemSelectedListener {
+    return object : ReposAdapter.OnItemSelectedListener {
+      override fun onRouteToRepoDetails(repoId: Int) {
+        setFragmentResult(
+          NavArguments.ROUTE_TO_REPO_DETAILS_REQUEST,
+          bundleOf(NavArguments.REPO_ID to repoId),
+        )
+        findNavController().navigate(Screen.RepoDetails.route)
+      }
+    }
   }
 
   private fun showReposList() {

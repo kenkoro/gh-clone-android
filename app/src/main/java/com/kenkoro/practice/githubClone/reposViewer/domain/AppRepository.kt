@@ -3,7 +3,7 @@ package com.kenkoro.practice.githubClone.reposViewer.domain
 import com.kenkoro.practice.githubClone.core.domain.util.NetworkError
 import com.kenkoro.practice.githubClone.core.domain.util.Result
 
-interface ReposViewerRepository {
+interface AppRepository {
   suspend fun getRepositories(): Result<List<Repo>, NetworkError>
 
   suspend fun getRepository(repoId: String): Result<RepoDetails, NetworkError>

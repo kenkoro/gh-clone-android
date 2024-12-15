@@ -7,8 +7,8 @@ import androidx.lifecycle.viewModelScope
 import com.kenkoro.practice.githubClone.core.domain.util.NetworkError
 import com.kenkoro.practice.githubClone.core.domain.util.onError
 import com.kenkoro.practice.githubClone.core.domain.util.onSuccess
+import com.kenkoro.practice.githubClone.reposViewer.domain.AppRepository
 import com.kenkoro.practice.githubClone.reposViewer.domain.Repo
-import com.kenkoro.practice.githubClone.reposViewer.domain.ReposViewerRepository
 import com.kenkoro.practice.githubClone.reposViewer.presentation.models.RepoUi
 import com.kenkoro.practice.githubClone.reposViewer.presentation.models.toRepoUi
 import com.kenkoro.practice.githubClone.reposViewer.presentation.reposList.util.ColorProvider
@@ -23,7 +23,7 @@ import javax.inject.Inject
 class ReposListViewModel
   @Inject
   constructor(
-    private val appRepository: ReposViewerRepository,
+    private val appRepository: AppRepository,
     private val colorProvider: ColorProvider,
     private val errorMessageProvider: NetworkErrorMessageProvider,
   ) : ViewModel() {
