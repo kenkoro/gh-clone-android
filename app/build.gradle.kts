@@ -1,3 +1,5 @@
+@file:Suppress("UnstableApiUsage")
+
 plugins {
   alias(libs.plugins.android.application)
   alias(libs.plugins.jetbrains.kotlin.android)
@@ -54,22 +56,25 @@ android {
     viewBinding = true
     buildConfig = true
   }
+  testOptions {
+    unitTests {
+      // See https://developer.android.com/reference/tools/gradle-api/8.3/com/android/build/api/dsl/UnitTestOptions#isIncludeAndroidResources()
+      isIncludeAndroidResources = true
+      all { test ->
+        test.systemProperties["robolectric.logging.enabled"] = "true"
+      }
+    }
+  }
 }
 
 dependencies {
   ksp(libs.hilt.android.compiler)
   implementation(libs.bundles.dagger.hilt)
-  implementation(libs.squareup.retrofit2)
-  implementation(libs.kotlinx.serialization.json)
-  implementation(libs.converter.kotlinx.serialization)
-  implementation(libs.androidx.recyclerview)
-  implementation(libs.androidx.core.ktx)
-  implementation(libs.androidx.appcompat)
+  implementation(libs.bundles.network)
+  implementation(libs.bundles.androidx)
   implementation(libs.material)
-  implementation(libs.androidx.constraintlayout)
-  implementation(libs.androidx.navigation.fragment.ktx)
-  implementation(libs.androidx.navigation.ui.ktx)
-  testImplementation(libs.junit)
-  androidTestImplementation(libs.androidx.junit)
-  androidTestImplementation(libs.androidx.espresso.core)
+  debugImplementation(libs.androidx.fragment.testing.manifest)
+  debugImplementation(libs.androidx.fragment.ktx)
+  testImplementation(libs.bundles.testing)
+  androidTestImplementation(libs.bundles.android.testing)
 }
