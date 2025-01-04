@@ -6,6 +6,8 @@ import android.os.Bundle
 import androidx.annotation.StyleRes
 import androidx.core.util.Preconditions
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentFactory
+import androidx.fragment.app.testing.FragmentFactoryHolderViewModel
 import androidx.fragment.testing.manifest.R
 import androidx.test.core.app.ActivityScenario
 import androidx.test.core.app.ApplicationProvider
@@ -15,6 +17,8 @@ import com.kenkoro.practice.githubClone.HiltTestActivity
  * A nice and fine helper function to launch a fragment with its view when you're dealing with
  * hilt, [see source.](https://github.com/android/architecture-samples/blob/dev-hilt/app/src/androidTest/java/com/example/android/architecture/blueprints/todoapp/HiltExt.kt)
  *
+ * @param fragmentArgs a bundle to passed into fragment
+ * @param themeResId a style resource id to be set to the host activity's theme
  * @sample com.kenkoro.practice.githubClone.reposViewer.presentation.auth.AuthFragmentTest.shouldStayOnAuth_WhenTheresNoTokenProvided
  */
 inline fun <reified T : Fragment> launchFragmentInHiltContainer(
