@@ -20,6 +20,7 @@ robolectric = "4.14"
 fragmentTesting = "1.8.5"
 junitKtx = "1.2.1"
 mockk = "1.13.14"
+runner = "1.6.2"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -34,16 +35,16 @@ androidx-navigation-testing = { group = "androidx.navigation", name = "navigatio
 dagger-android = { group = "com.google.dagger", name = "dagger-android", version.ref = "daggerHilt" }
 hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "daggerHilt" }
 hilt-android-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "daggerHilt" }
+hilt-android-testing = { group = "com.google.dagger", name = "hilt-android-testing", version.ref = "daggerHilt" }
 squareup-retrofit2 = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
 kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
 converter-kotlinx-serialization = { group = "com.squareup.retrofit2", name = "converter-kotlinx-serialization", version.ref = "kotlinxConverter" }
 androidx-recyclerview = { group = "androidx.recyclerview", name = "recyclerview", version.ref = "recyclerview" }
 robolectric = { group = "org.robolectric", name = "robolectric", version.ref = "robolectric" }
 androidx-fragment-testing = { group = "androidx.fragment", name = "fragment-testing", version.ref = "fragmentTesting" }
-androidx-fragment-testing-manifest = { group = "androidx.fragment", name = "fragment-testing-manifest", version.ref = "fragmentTesting" }
 androidx-junit-ktx = { group = "androidx.test.ext", name = "junit-ktx", version.ref = "junitKtx" }
-androidx-fragment-ktx = { group = "androidx.fragment", name = "fragment-ktx", version.ref = "fragmentTesting" }
 io-mockk = { group = "io.mockk", name = "mockk", version.ref = "mockk" }
+androidx-runner = { group = "androidx.test", name = "runner", version.ref = "runner" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
@@ -71,13 +72,15 @@ androidx = [
     "androidx-navigation-fragment-ktx",
     "androidx-navigation-ui-ktx",
     "androidx-junit-ktx",
+    "androidx-runner",
 ]
 testing = [
-    "androidx-fragment-testing",
     "junit",
+    "io-mockk",
     "robolectric",
     "androidx-navigation-testing",
-    "io-mockk",
+    "androidx-fragment-testing",
+    "hilt-android-testing",
 ]
 android-testing = [
     "junit",

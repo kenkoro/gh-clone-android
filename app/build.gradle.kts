@@ -73,8 +73,6 @@ dependencies {
   implementation(libs.bundles.network)
   implementation(libs.bundles.androidx)
   implementation(libs.material)
-  debugImplementation(libs.androidx.fragment.testing.manifest)
-  debugImplementation(libs.androidx.fragment.ktx)
   testImplementation(libs.bundles.testing)
   androidTestImplementation(libs.bundles.android.testing)
 }
