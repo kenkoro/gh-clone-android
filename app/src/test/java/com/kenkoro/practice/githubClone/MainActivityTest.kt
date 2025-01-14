@@ -20,7 +20,6 @@ import org.robolectric.annotation.Config
 
 @RunWith(AndroidJUnit4::class)
 @HiltAndroidTest
-@Config(application = HiltTestApplication::class)
 class MainActivityTest {
   @get:Rule
   val hiltRule = HiltAndroidRule(this)
