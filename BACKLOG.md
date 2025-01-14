@@ -3,7 +3,7 @@
 - [x] feat: pat local storing
 - [x] feat: repo list functionality (fetching)
 - [ ] feat: account log out
-- [ ] test(overdue): main activity behavior
+- [x] test(overdue): main activity behavior
 - [ ] test(overdue): auth fragment behavior
 - [ ] test(overdue): repo list fragment behavior
 - [ ] feat: repo details fragment

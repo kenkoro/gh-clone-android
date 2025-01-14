@@ -2,27 +2,33 @@ package com.kenkoro.practice.githubClone
 
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.Lifecycle
+import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.get
 import androidx.test.core.app.ActivityScenario
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.kenkoro.practice.githubClone.core.navigation.Screen
+import com.kenkoro.practice.githubClone.reposViewer.data.storage.KeyValueStorage
 import com.kenkoro.projects.githubClone.R
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
-import dagger.hilt.android.testing.HiltTestApplication
+import io.mockk.every
+import io.mockk.verify
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.robolectric.annotation.Config
+import javax.inject.Inject
 
 @RunWith(AndroidJUnit4::class)
 @HiltAndroidTest
 class MainActivityTest {
   @get:Rule
   val hiltRule = HiltAndroidRule(this)
+
+  @Inject
+  lateinit var keyValueStorage: KeyValueStorage
 
   @Before
   fun setUp() {
@@ -48,21 +54,55 @@ class MainActivityTest {
       "Repos List Screen" to Screen.ReposList.route,
       "Repo Details Screen" to Screen.RepoDetails.route,
     )
-    val expectedStartDestination = Screen.Auth.route
     val scenario = ActivityScenario.launch(MainActivity::class.java)
 
     scenario.moveToState(Lifecycle.State.CREATED)
 
     scenario.onActivity { activity ->
-      val navHostFragment =
-        activity.supportFragmentManager.findFragmentById(R.id.navHostFragment) as NavHostFragment
-      val navController = navHostFragment.navController
+      val navController = activity.navController()
       val graph = navController.graph
 
-      assertEquals(expectedStartDestination, navController.currentDestination?.route)
       configuration.forEach { (expectedLabel, route) ->
         assertEquals(expectedLabel, graph[route].label)
       }
     }
+  }
+
+  @Test
+  fun shouldStartOnAuthScreen_WhenNoTokenStored() {
+    every { keyValueStorage.retrieveToken() } returns ""
+    val expectedRoute = Screen.Auth.route
+    val scenario = ActivityScenario.launch(MainActivity::class.java)
+
+    scenario.moveToState(Lifecycle.State.CREATED)
+
+    scenario.onActivity { activity ->
+      val navController = activity.navController()
+
+      verify(exactly = 1) { keyValueStorage.retrieveToken() }
+      assertEquals(expectedRoute, navController.currentDestination?.route)
+    }
+  }
+
+  @Test
+  fun shouldStartOnRepoListScreen_WhenTokenFound() {
+    every { keyValueStorage.retrieveToken() } returns "token"
+    val expectedRoute = Screen.ReposList.route
+    val scenario = ActivityScenario.launch(MainActivity::class.java)
+
+    scenario.moveToState(Lifecycle.State.CREATED)
+
+    scenario.onActivity { activity ->
+      val navController = activity.navController()
+
+      verify(exactly = 1) { keyValueStorage.retrieveToken() }
+      assertEquals(expectedRoute, navController.currentDestination?.route)
+    }
+  }
+
+  private fun MainActivity.navController(): NavController {
+    val navHostFragment =
+      supportFragmentManager.findFragmentById(R.id.navHostFragment) as NavHostFragment
+    return navHostFragment.navController
   }
 }
