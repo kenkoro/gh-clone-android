@@ -2,9 +2,13 @@
 - [x] feat: authentication w/ personal access token (PAT)
 - [x] feat: pat local storing
 - [x] feat: repo list functionality (fetching)
-- [ ] feat: account log out
 - [x] test(overdue): main activity behavior
 - [ ] test(overdue): auth fragment behavior
 - [ ] test(overdue): repo list fragment behavior
+- [ ] test(overdue): key value storage
+- [ ] test(overdue): get repos in the app repository
+- [ ] test(overdue): auth in the app repository
+- [ ] feat: log out from user's account
 - [ ] feat: repo details fragment
+- [ ] feat: get repo, get repo's readme in the app repository
   - come up w/ a solution, tests, fragment behavior, refactoring
