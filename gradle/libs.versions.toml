@@ -6,6 +6,7 @@ ktlint = "12.1.0"
 kotlinxSerialization = "2.0.20"
 kotlinxSerializationJson = "1.7.3"
 kotlinxConverter = "2.11.0"
+kotlinxCoroutinesTest = "1.10.1"
 daggerHilt = "2.51.1"
 coreKtx = "1.15.0"
 junit = "4.13.2"
@@ -38,6 +39,7 @@ hilt-android-compiler = { group = "com.google.dagger", name = "hilt-android-comp
 hilt-android-testing = { group = "com.google.dagger", name = "hilt-android-testing", version.ref = "daggerHilt" }
 squareup-retrofit2 = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
 kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
+kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "kotlinxCoroutinesTest" }
 converter-kotlinx-serialization = { group = "com.squareup.retrofit2", name = "converter-kotlinx-serialization", version.ref = "kotlinxConverter" }
 androidx-recyclerview = { group = "androidx.recyclerview", name = "recyclerview", version.ref = "recyclerview" }
 robolectric = { group = "org.robolectric", name = "robolectric", version.ref = "robolectric" }
@@ -81,6 +83,7 @@ testing = [
     "androidx-navigation-testing",
     "androidx-fragment-testing",
     "hilt-android-testing",
+    "kotlinx-coroutines-test",
 ]
 android-testing = [
     "junit",
