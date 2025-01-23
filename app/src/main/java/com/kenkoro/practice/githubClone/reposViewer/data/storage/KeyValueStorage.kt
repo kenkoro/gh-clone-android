@@ -21,6 +21,11 @@ class KeyValueStorage(
   var authToken: String? = null
     private set
 
+  /**
+   * Saves a Github PAT locally. It's not recommended to use it on the UI thread.
+   *
+   * @sample com.kenkoro.practice.githubClone.reposViewer.data.networking.RemoteAppRepository.signIn
+   */
   suspend fun saveToken(authToken: String) {
     this.authToken = authToken
     mutex.withLock {
