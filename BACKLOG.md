@@ -3,7 +3,7 @@
 - [x] feat: pat local storing
 - [x] feat: repo list functionality (fetching)
 - [x] test(overdue): main activity behavior
-- [ ] test(overdue): auth fragment behavior
+- [x] test(overdue): auth fragment behavior
 - [ ] test(overdue): repo list fragment behavior
 - [ ] test(overdue): key value storage
 - [ ] test(overdue): get repos in the app repository
