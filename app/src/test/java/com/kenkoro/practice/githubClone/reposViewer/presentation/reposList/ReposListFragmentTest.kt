@@ -52,7 +52,7 @@ class ReposListFragmentTest {
   }
 
   @Test
-  fun shouldBeInflated_WhenCreated() {
+  fun `should be inflated when created`() {
     launchFragmentInHiltContainer<ReposListFragment> {
       val root = requireActivity().findViewById<ConstraintLayout>(R.id.mainRoot)
       assert(root.isShown)
@@ -60,7 +60,7 @@ class ReposListFragmentTest {
   }
 
   @Test
-  fun shouldShowReposListScreen_WhenInitialLoadIsSuccessful() {
+  fun `should show a repos list when init load was successful`() {
     val expectedNumberOfRepos = 1
     coEvery { appRepository.getRepositories() } returns oneRepoResponse
 
@@ -71,7 +71,7 @@ class ReposListFragmentTest {
   }
 
   @Test
-  fun shouldShowWarningScreen_WhenInitialLoadIsFailed() {
+  fun `should show the warning when init load was a failure`() {
     val failedResponse = Result.Error(NetworkError.RequiresAuthentication)
     coEvery { appRepository.getRepositories() } returns failedResponse
 
@@ -90,7 +90,7 @@ class ReposListFragmentTest {
   }
 
   @Test
-  fun shouldShowEmptyReposListScreen_WhenInitialLoadIsSuccessful() {
+  fun `should show an empty repos list when init load was successful`() {
     val emptyResponse = Result.Success(emptyList<Repo>())
     coEvery { appRepository.getRepositories() } returns emptyResponse
 
@@ -109,7 +109,7 @@ class ReposListFragmentTest {
   }
 
   @Test
-  fun shouldShowReposListScreen_WhenUserRetries() {
+  fun `should show again a repos list when the user retries`() {
     val expectedNumberOfRepos = 1
     val firstFailedResponse = Result.Error(NetworkError.RequiresAuthentication)
     coEvery { appRepository.getRepositories() } returnsMany
@@ -136,7 +136,7 @@ class ReposListFragmentTest {
 
   @Ignore("Not yet implemented :)")
   @Test
-  fun shouldGoToRepoDetailsScreen_WhenARepoWasClicked() {}
+  fun `should go to the repo details screen when a repo was clicked`() {}
 
   private fun FragmentActivity.plainReposAssertion(expectedNumberOfRepos: Int) {
     val reposList = findViewById<RecyclerView>(R.id.rvRepos)

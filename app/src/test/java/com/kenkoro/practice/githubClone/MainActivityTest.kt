@@ -36,7 +36,7 @@ class MainActivityTest {
   }
 
   @Test
-  fun shouldBeInflated_WhenCreated() {
+  fun `should be inflated when created`() {
     val scenario = ActivityScenario.launch(MainActivity::class.java)
 
     scenario.moveToState(Lifecycle.State.CREATED)
@@ -48,7 +48,7 @@ class MainActivityTest {
   }
 
   @Test
-  fun shouldConfigureGraph_WhenCreated() {
+  fun `should configure the graph when created`() {
     val configuration =
       mapOf(
         "Auth Screen" to Screen.Auth.route,
@@ -70,7 +70,7 @@ class MainActivityTest {
   }
 
   @Test
-  fun shouldStartOnAuthScreen_WhenNoTokenStored() {
+  fun `should start on the auth screen when no token stored`() {
     every { keyValueStorage.retrieveToken() } returns ""
     val expectedRoute = Screen.Auth.route
     val scenario = ActivityScenario.launch(MainActivity::class.java)
@@ -86,7 +86,7 @@ class MainActivityTest {
   }
 
   @Test
-  fun shouldStartOnRepoListScreen_WhenTokenFound() {
+  fun `should start on the repos-list screen when a token found`() {
     every { keyValueStorage.retrieveToken() } returns "token"
     val expectedRoute = Screen.ReposList.route
     val scenario = ActivityScenario.launch(MainActivity::class.java)

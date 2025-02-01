@@ -61,7 +61,7 @@ class AuthFragmentTest {
   }
 
   @Test
-  fun shouldBeInflated_WhenCreated() {
+  fun `should be inflated when created`() {
     launchFragmentInHiltContainer<AuthFragment> {
       val root = requireActivity().findViewById<ConstraintLayout>(R.id.mainRoot)
       assert(root.isShown)
@@ -69,7 +69,7 @@ class AuthFragmentTest {
   }
 
   @Test
-  fun shouldGoToReposListScreen_WhenGivenTokenIsValid() {
+  fun `should go to the repos-list screen when the token is valid`() {
     val expectedRoute = Screen.ReposList.route
     val successfulResponse = Result.Success(UserInfo(login = "login"))
     coEvery { appRepository.signIn(any()) } returns successfulResponse
@@ -96,7 +96,7 @@ class AuthFragmentTest {
   }
 
   @Test
-  fun shouldShowError_WhenGivenTokenIsInvalid() {
+  fun `should show an error when the token is invalid`() {
     val expectedRoute = Screen.Auth.route
     val failedResponse = Result.Error(NetworkError.RequiresAuthentication)
     coEvery { appRepository.signIn(any()) } returns failedResponse
