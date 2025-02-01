@@ -23,18 +23,20 @@ inline fun <reified T : Fragment> launchFragmentInHiltContainer(
   @StyleRes themeResId: Int = R.style.Theme_GithubApp,
   crossinline action: Fragment.() -> Unit = {},
 ) {
-  val startActivityIntent = Intent.makeMainActivity(
-    ComponentName(
-      ApplicationProvider.getApplicationContext(),
-      HiltTestActivity::class.java,
-    )
-  ).putExtra(EXTRA_THEME, themeResId)
+  val startActivityIntent =
+    Intent.makeMainActivity(
+      ComponentName(
+        ApplicationProvider.getApplicationContext(),
+        HiltTestActivity::class.java,
+      ),
+    ).putExtra(EXTRA_THEME, themeResId)
 
   ActivityScenario.launch<HiltTestActivity>(startActivityIntent).onActivity { activity ->
-    val fragment = activity.supportFragmentManager.fragmentFactory.instantiate(
-      Preconditions.checkNotNull(T::class.java.classLoader),
-      T::class.java.name,
-    )
+    val fragment =
+      activity.supportFragmentManager.fragmentFactory.instantiate(
+        Preconditions.checkNotNull(T::class.java.classLoader),
+        T::class.java.name,
+      )
     fragment.arguments = fragmentArgs
     activity.supportFragmentManager
       .beginTransaction()

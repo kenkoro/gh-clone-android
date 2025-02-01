@@ -8,6 +8,7 @@
 - [ ] test(overdue): key value storage
 - [ ] test(overdue): get repos in the app repository
 - [ ] test(overdue): auth in the app repository
+- [ ] fix: rename fragments by conventions
 - [ ] feat: log out from user's account
 - [ ] feat: repo details fragment
 - [ ] feat: get repo, get repo's readme in the app repository

@@ -49,11 +49,12 @@ class MainActivityTest {
 
   @Test
   fun shouldConfigureGraph_WhenCreated() {
-    val configuration = mapOf(
-      "Auth Screen" to Screen.Auth.route,
-      "Repos List Screen" to Screen.ReposList.route,
-      "Repo Details Screen" to Screen.RepoDetails.route,
-    )
+    val configuration =
+      mapOf(
+        "Auth Screen" to Screen.Auth.route,
+        "Repos List Screen" to Screen.ReposList.route,
+        "Repo Details Screen" to Screen.RepoDetails.route,
+      )
     val scenario = ActivityScenario.launch(MainActivity::class.java)
 
     scenario.moveToState(Lifecycle.State.CREATED)
