@@ -11,7 +11,6 @@ import com.kenkoro.practice.githubClone.reposViewer.domain.AppRepository
 import com.kenkoro.practice.githubClone.reposViewer.domain.UserInfo
 import com.kenkoro.practice.githubClone.reposViewer.presentation.reposList.util.NetworkErrorMessageProvider
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
@@ -49,7 +48,7 @@ class AuthViewModel
       val bearerToken = toBearerToken(token.value).trim()
       viewModelScope.launch {
         val result =
-          withContext(Dispatchers.IO) {
+          withContext(appRepository.defaultDispatcher) {
             appRepository.signIn(bearerToken)
           }
         result

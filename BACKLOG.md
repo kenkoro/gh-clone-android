@@ -4,11 +4,12 @@
 - [x] feat: repo list functionality (fetching)
 - [x] test(overdue): main activity behavior
 - [x] test(overdue): auth fragment behavior
-- [ ] test(overdue): repo list fragment behavior
+- [x] test(overdue): repo list fragment behavior
 - [ ] test(overdue): key value storage
 - [ ] test(overdue): get repos in the app repository
 - [ ] test(overdue): auth in the app repository
 - [ ] fix: rename fragments by conventions
+- [ ] fix(repos-list): a bundle instead of a fragment result
 - [ ] feat: log out from user's account
 - [ ] feat: repo details fragment
 - [ ] feat: get repo, get repo's readme in the app repository

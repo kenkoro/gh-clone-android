@@ -15,11 +15,16 @@ import com.kenkoro.practice.githubClone.reposViewer.domain.Readme
 import com.kenkoro.practice.githubClone.reposViewer.domain.Repo
 import com.kenkoro.practice.githubClone.reposViewer.domain.RepoDetails
 import com.kenkoro.practice.githubClone.reposViewer.domain.UserInfo
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 
 class RemoteAppRepository(
   private val githubApi: GithubApi,
   private val keyValueStorage: KeyValueStorage,
 ) : AppRepository {
+  override val defaultDispatcher: CoroutineDispatcher
+    get() = Dispatchers.IO
+
   override suspend fun getRepositories(): Result<List<Repo>, NetworkError> {
     val token = keyValueStorage.retrieveToken()
     return safeCall<List<RepoDto>> {

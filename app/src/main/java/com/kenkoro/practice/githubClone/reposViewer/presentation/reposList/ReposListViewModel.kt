@@ -14,7 +14,6 @@ import com.kenkoro.practice.githubClone.reposViewer.presentation.models.toRepoUi
 import com.kenkoro.practice.githubClone.reposViewer.presentation.reposList.util.ColorProvider
 import com.kenkoro.practice.githubClone.reposViewer.presentation.reposList.util.NetworkErrorMessageProvider
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -43,7 +42,7 @@ class ReposListViewModel
 
       viewModelScope.launch {
         val result =
-          withContext(Dispatchers.IO) {
+          withContext(appRepository.defaultDispatcher) {
             appRepository.getRepositories()
           }
         result
