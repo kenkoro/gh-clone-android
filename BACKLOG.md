@@ -5,7 +5,7 @@
 - [x] test(overdue): main activity behavior
 - [x] test(overdue): auth fragment behavior
 - [x] test(overdue): repo list fragment behavior
-- [ ] test(overdue): key value storage
+- [x] test(overdue): key value storage
 - [ ] test(overdue): get repos in the app repository
 - [ ] test(overdue): auth in the app repository
 - [ ] fix: rename fragments by conventions
