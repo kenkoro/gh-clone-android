@@ -19,6 +19,7 @@ import kotlinx.coroutines.test.runTest
 import okhttp3.ResponseBody
 import org.junit.Assert.assertEquals
 import org.junit.Before
+import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -122,4 +123,20 @@ class RemoteAppRepositoryTest {
       assertEquals(expected, actual)
       coVerify(inverse = true) { keyValueStorage.saveToken(token) }
     }
+
+  @Ignore("Not yet implemented :)")
+  @Test
+  fun `should get a repo when the get a repo call was successful`() {}
+
+  @Ignore("Not yet implemented :)")
+  @Test
+  fun `should get a repo's readme when the get a repo's readme call was successful`() {}
+
+  @Ignore("Not yet implemented :)")
+  @Test
+  fun `should get an error when the get a repo call was a failure`() {}
+
+  @Ignore("Not yet implemented :)")
+  @Test
+  fun `should get an error when the get a repo's readme call was a failure`() {}
 }

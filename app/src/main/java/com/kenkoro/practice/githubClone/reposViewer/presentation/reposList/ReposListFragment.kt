@@ -21,13 +21,13 @@ import com.kenkoro.practice.githubClone.core.navigation.Screen
 import com.kenkoro.practice.githubClone.core.navigation.util.NavArguments
 import com.kenkoro.practice.githubClone.reposViewer.presentation.models.RepoUi
 import com.kenkoro.projects.githubClone.R
-import com.kenkoro.projects.githubClone.databinding.ReposListFragmentBinding
+import com.kenkoro.projects.githubClone.databinding.FragmentReposListBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class ReposListFragment : Fragment() {
-  private var _binding: ReposListFragmentBinding? = null
-  private val binding: ReposListFragmentBinding
+  private var _binding: FragmentReposListBinding? = null
+  private val binding: FragmentReposListBinding
     get() = _binding!!
 
   private lateinit var rvRepos: RecyclerView
@@ -44,7 +44,7 @@ class ReposListFragment : Fragment() {
     container: ViewGroup?,
     savedInstanceState: Bundle?,
   ): View? {
-    _binding = ReposListFragmentBinding.inflate(inflater, container, false)
+    _binding = FragmentReposListBinding.inflate(inflater, container, false)
     return binding.root
   }
 

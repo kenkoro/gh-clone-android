@@ -9,7 +9,7 @@
 - [x] test(overdue): get repos in the app repository
 - [ ] ~~test: move to `runTest` instead of creating your own test dispatcher~~
 - [x] test(overdue): auth in the app repository
-- [ ] fix: rename fragments by conventions
+- [x] fix: rename fragments by conventions
 - [ ] fix(repos-list): a bundle instead of a fragment result
 - [ ] feat: log out from user's account
 - [ ] feat: repo details fragment

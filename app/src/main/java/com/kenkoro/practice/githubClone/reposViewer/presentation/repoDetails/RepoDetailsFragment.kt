@@ -8,11 +8,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResultListener
 import com.kenkoro.practice.githubClone.core.navigation.util.NavArguments
-import com.kenkoro.projects.githubClone.databinding.RepoDetailsFragmentBinding
+import com.kenkoro.projects.githubClone.databinding.FragmentRepoDetailsBinding
 
 class RepoDetailsFragment : Fragment() {
-  private var _binding: RepoDetailsFragmentBinding? = null
-  private val binding: RepoDetailsFragmentBinding
+  private var _binding: FragmentRepoDetailsBinding? = null
+  private val binding: FragmentRepoDetailsBinding
     get() = _binding!!
 
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,7 +28,7 @@ class RepoDetailsFragment : Fragment() {
     container: ViewGroup?,
     savedInstanceState: Bundle?,
   ): View? {
-    _binding = RepoDetailsFragmentBinding.inflate(inflater, container, false)
+    _binding = FragmentRepoDetailsBinding.inflate(inflater, container, false)
     return binding.root
   }
 

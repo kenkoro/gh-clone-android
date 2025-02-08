@@ -21,15 +21,15 @@ import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.kenkoro.practice.githubClone.core.navigation.Screen
 import com.kenkoro.projects.githubClone.R
-import com.kenkoro.projects.githubClone.databinding.AuthFragmentBinding
+import com.kenkoro.projects.githubClone.databinding.FragmentAuthBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class AuthFragment : Fragment() {
-  private var _binding: AuthFragmentBinding? = null
-  private val binding: AuthFragmentBinding
+  private var _binding: FragmentAuthBinding? = null
+  private val binding: FragmentAuthBinding
     get() = _binding!!
 
   private lateinit var tietAuthToken: TextInputEditText
@@ -57,7 +57,7 @@ class AuthFragment : Fragment() {
     container: ViewGroup?,
     savedInstanceState: Bundle?,
   ): View {
-    _binding = AuthFragmentBinding.inflate(inflater, container, false)
+    _binding = FragmentAuthBinding.inflate(inflater, container, false)
     return binding.root
   }
 
