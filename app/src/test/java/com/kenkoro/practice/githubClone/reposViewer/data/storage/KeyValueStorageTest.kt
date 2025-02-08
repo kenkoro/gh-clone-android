@@ -68,10 +68,19 @@ class KeyValueStorageTest {
         }
       }
 
-      testScheduler.advanceUntilIdle()
       val actualToken = keyValueStorage.retrieveToken()
 
+      testScheduler.advanceUntilIdle()
       assertEquals(expectedToken, actualToken)
       assertEquals(expectedCachedToken, keyValueStorage.authToken)
     }
+
+  @Test
+  fun `should retrieve an empty pat when there were no savings`() {
+    val expectedToken = ""
+
+    val actualToken = keyValueStorage.retrieveToken()
+
+    assertEquals(expectedToken, actualToken)
+  }
 }
