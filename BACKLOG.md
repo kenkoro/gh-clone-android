@@ -7,10 +7,10 @@
 - [x] test(overdue): repo list fragment behavior
 - [x] test(overdue): key value storage
 - [x] test(overdue): get repos in the app repository
-- [ ] ~~test: move to `runTest` instead of creating your own test dispatcher~~
 - [x] test(overdue): auth in the app repository
 - [x] fix: rename fragments by conventions
-- [ ] fix(repos-list): a bundle instead of a fragment result
+- [ ] ~~fix(repos-list): a bundle instead of a fragment result~~
+- [ ] test: move to `runTest` instead of creating your own test dispatcher
 - [ ] feat: log out from user's account
 - [ ] feat: repo details fragment
 - [ ] feat: get repo, get repo's readme in the app repository
