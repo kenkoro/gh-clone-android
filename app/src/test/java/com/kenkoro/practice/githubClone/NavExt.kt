@@ -11,7 +11,9 @@ import androidx.navigation.testing.TestNavHostController
  * from code directly, not from an .xml file. It automatically calls [TestNavHostController.setGraph].
  * See official [documentation on this part as well.](https://developer.android.com/guide/navigation/testing)
  *
- * @sample com.kenkoro.practice.githubClone.reposViewer.presentation.auth.AuthFragmentTest.setUp
+ * @param startDestination a start destination as a string
+ * @param startDestinationArgs a start destination's extra arguments
+ * @param builder a block for building a new testable graph
  */
 internal fun TestNavHostController.createTestableGraph(
   startDestination: String,

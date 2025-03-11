@@ -5,12 +5,18 @@ import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatButton
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.get
 import androidx.core.view.isGone
 import androidx.fragment.app.FragmentActivity
+import androidx.navigation.Navigation
+import androidx.navigation.testing.TestNavHostController
 import androidx.recyclerview.widget.RecyclerView
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.kenkoro.practice.githubClone.core.domain.util.NetworkError
 import com.kenkoro.practice.githubClone.core.domain.util.Result
+import com.kenkoro.practice.githubClone.core.navigation.Screen
+import com.kenkoro.practice.githubClone.createTestableGraph
+import com.kenkoro.practice.githubClone.fragment
 import com.kenkoro.practice.githubClone.launchFragmentInHiltContainer
 import com.kenkoro.practice.githubClone.reposViewer.domain.AppRepository
 import com.kenkoro.practice.githubClone.reposViewer.domain.Repo
@@ -18,6 +24,7 @@ import com.kenkoro.projects.githubClone.R
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import io.mockk.coEvery
+import io.mockk.coVerify
 import io.mockk.every
 import kotlinx.coroutines.test.StandardTestDispatcher
 import org.junit.Assert.assertEquals
@@ -134,9 +141,32 @@ class ReposListFragmentTest {
     }
   }
 
-  @Ignore("Not yet implemented :)")
+  @Ignore("Not yet completed :)")
   @Test
-  fun `should go to the repo details screen when a repo was clicked`() {}
+  fun `should go to the repo details screen when a repo was clicked`() {
+    val expectedRoute = Screen.RepoDetails.route
+    coEvery { appRepository.getRepositories() } returns oneRepoResponse
+
+    launchFragmentInHiltContainer<ReposListFragment> {
+      val navController =
+        TestNavHostController(requireContext()).createTestableGraph(Screen.ReposList.route) {
+          fragment(route = Screen.ReposList.route)
+          fragment(route = Screen.RepoDetails.route)
+        }
+      Navigation.setViewNavController(requireView(), navController)
+      with(requireActivity()) {
+        testDispatcher.scheduler.advanceUntilIdle()
+        val reposList = findViewById<RecyclerView>(R.id.rvRepos)
+        val firstRepo = reposList.findViewHolderForAdapterPosition(0)
+
+//        assert(firstRepo?.itemView?.isShown)
+//        firstRepo.performClick()
+
+        coVerify(exactly = 1) { appRepository.getRepositories() }
+        assertEquals(expectedRoute, navController.currentDestination?.route)
+      }
+    }
+  }
 
   private fun FragmentActivity.plainReposAssertion(expectedNumberOfRepos: Int) {
     val reposList = findViewById<RecyclerView>(R.id.rvRepos)

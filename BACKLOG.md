@@ -10,7 +10,10 @@
 - [x] test(overdue): auth in the app repository
 - [x] fix: rename fragments by conventions
 - [ ] ~~fix(repos-list): a bundle instead of a fragment result~~
-- [ ] test: move to `runTest` instead of creating your own test dispatcher
+  - Fragment Result API seems to fit in pretty fine
+- [ ] ~~test: move to `runTest` instead of creating your own test dispatcher~~
+  - in AndroidX tests (mostly the presentation layers) we use a custom test dispatcher in
+  order to mock a repo's default dispatcher
 - [ ] feat: log out from user's account
 - [ ] feat: repo details fragment
 - [ ] feat: get repo, get repo's readme in the app repository
