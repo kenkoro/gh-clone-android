@@ -18,3 +18,4 @@
 - [ ] feat: repo details fragment
 - [ ] feat: get repo, get repo's readme in the app repository
   - come up w/ a solution, tests, fragment behavior, refactoring
+- [ ] docs: generate a site on this project's context, internal API
